@@ -1,15 +1,20 @@
 import React from "react";
 import { IoTimeOutline } from "react-icons/io5";
 import { FiArrowRight } from "react-icons/fi";
-const NewsCard = ({news}) => {
+import BreakingNews from "../assets/Breaking.jpg"
+import { Link } from "react-router-dom";
+const NewsCard = ({ news }) => {
   return (
-        <div className="bg-gradient-to-br bg-[#292524] text-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group border border-[#44403c] border-opacity-30">
+    <div className="bg-gradient-to-br bg-[#292524] text-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group border border-[#44403c] border-opacity-30">
       {/* Image with hover zoom effect */}
       <div className="h-48 overflow-hidden">
         <img
-          src={news.image}
+          src={
+            news.image_url ||
+           BreakingNews //Fall back image
+          }
           alt={news.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-48 object-cover rounded-t-lg"
         />
       </div>
 
@@ -32,10 +37,14 @@ const NewsCard = ({news}) => {
         </div>
 
         {/* Read More button with animated arrow */}
-        <button className="flex items-center text-amber-400 hover:text-amber-300 transition-colors duration-300 font-medium">
-          Read More
-          <FiArrowRight className="ml-2 opacity-0 group-hover:opacity-100 translate-x-0 group-hover:translate-x-1 transition-all duration-300" />
-        </button>
+       <Link
+  to={`/news/${encodeURIComponent(news.title)}`}
+  state={{ news }}
+  className="group flex items-center text-amber-400 hover:text-amber-300 transition-colors duration-300 font-medium"
+>
+  Read More
+  <FiArrowRight className="ml-2 opacity-0 group-hover:opacity-100 translate-x-0 group-hover:translate-x-1 transition-all duration-300" />
+</Link>
       </div>
     </div>
   );
