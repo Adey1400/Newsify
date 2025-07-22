@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Footer from './pages/Footer';
 import NewsDetails from './pages/NewsDetails';
-import SearchResult from './components/SearchResult';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home articles={articles} />} />
             <Route path="/news/:id" element={<NewsDetails articles={articles} />} />
-            <Route path="/search" element={<SearchResult articles={articles} />} />
+
           </Routes>
         </main>
 

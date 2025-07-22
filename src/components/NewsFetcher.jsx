@@ -27,25 +27,28 @@ const NewsFetcher = ({ selectedCategory }) => {
   }, [selectedCategory]);
 
   return (
-    <div className="mt-6">
-      {loading ? (
-        <div className="text-center py-10 text-white text-lg animate-pulse">
-          Fetching fresh headlines...
+   <div className="mt-6 px-4 sm:px-6">
+  {loading ? (
+    <div className="text-center py-10 text-white text-lg animate-pulse">
+      Fetching fresh headlines...
+    </div>
+  ) : (
+    <>
+      {articles.length > 0 ? (
+        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {articles.map((article, index) => (
+            <NewsCard key={index} news={article} />
+          ))}
         </div>
       ) : (
-        <>
-          {articles.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {articles.map((article, index) => (
-                <NewsCard key={index} news={article} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-white text-center mt-10 text-lg">No articles found for this category.</p>
-          )}
-        </>
+        <p className="text-white text-center mt-10 text-lg">
+          No articles found for this category.
+        </p>
       )}
-    </div>
+    </>
+  )}
+</div>
+
   );
 };
 
