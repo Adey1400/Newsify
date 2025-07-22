@@ -7,9 +7,10 @@ const Navbar = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
   const [searchQuery , setSearchQuery]= useState("")
-  const handleSearch =()=>{
-   if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery(''); // Clear search after searching
     }
   }
   const handleKeyDown = (e) => {
@@ -21,7 +22,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="flex items-center space-x-2 mb-4 md:mb-0">
           <FaNewspaper className="text-2xl" />
-          <span className="text-2xl font-bold tracking-tight">Newisfy</span>
+          <span className="text-2xl font-bold tracking-tight">Newsify</span>
         </div>
 
         {/* Navigation Links */}
@@ -54,9 +55,10 @@ const Navbar = () => {
               placeholder="Search..."
               value={searchQuery}
               onChange={(e)=>setSearchQuery(e.target.value)}
-              className="py-2 px-4 pr-10 rounded-full text-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 w-full md:w-64 transition-all duration-300"
+              onKeyDown={handleKeyDown}
+              className="py-2 px-4 pr-10 rounded-full bg-[#292524] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-opacity-50 w-full md:w-64 transition-all duration-300"
             />
-            <button onClick={handleSearch} className="absolute right-3 text-gray-500 hover:text-[#292524] transition-colors duration-300">
+            <button onClick={handleSearch} className="absolute right-3 text-gray-400 hover:text-amber-400 transition-colors duration-300">
               <FiSearch className="text-xl" />
             </button>
           </div>
